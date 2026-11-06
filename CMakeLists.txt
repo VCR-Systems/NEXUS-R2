@@ -33,11 +33,19 @@ project(NEXUS-R2 C CXX ASM)
 # Initialise the Raspberry Pi Pico SDK
 pico_sdk_init()
 
+# Add FatFs library
+set(FATFS_PATH ${CMAKE_CURRENT_LIST_DIR}/no-OS-FatFS)
+add_subdirectory(${FATFS_PATH} FatFs_SPI)
+
+file(GLOB NEXUS_SOURCES CONFIGURE_DEPENDS
+    ${CMAKE_CURRENT_LIST_DIR}/_src/*.cpp
+)
+
 # Add executable. Default name is the project name, version 0.1
-add_subdirectory(no-OS-FatFS)
+add_subdirectory(no-OS-FatFS/src)
 add_executable(NEXUS-R2 
     main.cpp
-    hw_config.c
+    _src/hw_config.cpp
     )
 
 pico_set_program_name(NEXUS-R2 "NEXUS-R2")
