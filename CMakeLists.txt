@@ -41,10 +41,8 @@ file(GLOB NEXUS_SOURCES CONFIGURE_DEPENDS
     ${CMAKE_CURRENT_LIST_DIR}/_src/*.cpp
 )
 
-# Add executable. Default name is the project name, version 0.1
-add_subdirectory(no-OS-FatFS/src)
 add_executable(NEXUS-R2 
-    main.cpp
+    _src/main.cpp
     _src/hw_config.cpp
     )
 
