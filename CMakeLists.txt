@@ -64,6 +64,7 @@ target_link_libraries(NEXUS-R2
 # Add the standard include files to the build
 target_include_directories(NEXUS-R2 PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}
+        ${FATFS_PATH}/src/ff15/source
 )
 
 pico_enable_stdio_usb(NEXUS-R2 1)
