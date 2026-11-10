@@ -6,7 +6,6 @@
 #include "hardware/i2c.h"
 #include "hardware/spi.h"
 #include "config.hpp"
-#include "ff.h"
 
 int imu_data;
 int baro_data;

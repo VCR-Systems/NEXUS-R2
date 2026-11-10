@@ -1,57 +1,35 @@
-# == DO NOT EDIT THE FOLLOWING LINES for the Raspberry Pi Pico VS Code Extension to work ==
-if(WIN32)
-    set(USERHOME $ENV{USERPROFILE})
-else()
-    set(USERHOME $ENV{HOME})
-endif()
-set(sdkVersion 2.3.1)
-set(toolchainVersion 15_2_Rel1)
-set(picotoolVersion 2.3.1)
-set(picoVscode ${USERHOME}/.pico-sdk/cmake/pico-vscode.cmake)
-if (EXISTS ${picoVscode})
-    include(${picoVscode})
-endif()
-# ====================================================================================
-set(PICO_BOARD pico CACHE STRING "Board type")
 
 cmake_minimum_required(VERSION 3.13)
 
-include(pico_sdk_import.cmake)
+# Import Pico SDK from Git submodule
+include(pico-sdk/external/pico_sdk_import.cmake)
 
 project(NEXUS-R2 C CXX ASM)
+
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)
 
+# Select VCC-GND YD-RP2040 with 16MB flash
+set(PICO_BOARD vcc-gnd_yd-rp2040_16m)
+
+# Initialize Pico SDK
 pico_sdk_init()
 
-# --- Point directly to the FatFs_SPI subdirectory where CMakeLists.txt lives ---
-set(FATFS_PATH ${CMAKE_CURRENT_LIST_DIR}/lib/no-OS-FatFS-SD-SPI-RPi-Pico/FatFs_SPI)
-add_subdirectory(${FATFS_PATH} FatFs_SPI)
-
-file(GLOB NEXUS_SOURCES CONFIGURE_DEPENDS
-    ${CMAKE_CURRENT_LIST_DIR}/_src/*.cpp
+# Main executable
+add_executable(NEXUS-R2
+    _src/main.cpp
 )
 
-add_executable(NEXUS-R2 
-    ${NEXUS-R2_SOURCES}
-    _src/hw_config.c
-)
-
-target_include_directories(NEXUS-R2 PRIVATE
-    ${CMAKE_CURRENT_LIST_DIR}/_include
-)
-
-target_link_libraries(NEXUS-R2 PRIVATE
+# Link hardware libraries
+target_link_libraries(NEXUS-R2
     pico_stdlib
-    hardware_gpio
     hardware_i2c
     hardware_spi
-    FatFs_SPI
 )
 
-# Enable USB output, disable UART output for printf
+# USB serial output
 pico_enable_stdio_usb(NEXUS-R2 1)
 pico_enable_stdio_uart(NEXUS-R2 0)
 
-# Tells CMake to generate the .uf2 file for your executable
+# Generate UF2, BIN, HEX, and MAP files
 pico_add_extra_outputs(NEXUS-R2)

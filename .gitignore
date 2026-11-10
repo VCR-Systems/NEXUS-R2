@@ -1,2 +1,12 @@
-build
-!.vscode/*
+# CMake build output
+build/
+
+# Compiled binaries
+*.elf
+*.uf2
+*.bin
+*.hex
+*.map
+
+# IDE files
+.DS_Store
