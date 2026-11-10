@@ -11,10 +11,6 @@
 int imu_data;
 int baro_data;
 
-int16_t accel[3] {0, 0, 0};
-int16_t gyro[3] {0, 0, 0};
-
-
 int main() {
     stdio_init_all();
 }
