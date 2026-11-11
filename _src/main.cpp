@@ -11,5 +11,22 @@ int imu_data;
 int baro_data;
 
 int main() {
-    stdio_init_all();
+    gpio_init(LED_PIN); // led/status devices
+    gpio_init(BUZZER_PIN);
+    gpio_init(NEOPIXEL_PIN);
+    gpio_set_dir(LED_PIN, GPIO_OUT);
+    gpio_set_dir(BUZZER_PIN, GPIO_OUT);
+    gpio_set_dir(NEOPIXEL_PIN, GPIO_OUT);
+
+    gpio_set_function(BMP180_SDA_PIN, GPIO_FUNC_I2C);
+    gpio_set_function(MPU6050_SDA_PIN, GPIO_FUNC_I2C);
+    gpio_set_function(BMP180_SCL_PIN, GPIO_FUNC_I2C);
+    gpio_set_function(MPU6050_SCL_PIN, GPIO_FUNC_I2C);
+
+    gpio_set_function(SD_CS_PIN, GPIO_FUNC_SPI);
+    gpio_set_function(SD_SCK_PIN, GPIO_FUNC_SPI);
+    gpio_set_function(SD_MOSI_PIN, GPIO_FUNC_SPI);
+    gpio_set_function(SD_MISO_PIN, GPIO_FUNC_SPI);
+
+    
 }

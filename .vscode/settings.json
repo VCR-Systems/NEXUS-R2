@@ -1,3 +1,4 @@
 {
-    "cmake.sourceDirectory": "/Users/christophercyhui/Documents/GitHub/NEXUS-R2/pico-sdk"
-}
+    "cmake.sourceDirectory": "/Users/christophercyhui/Documents/GitHub/NEXUS-R2",
+    "cmake.buildDirectory": "/Users/christophercyhui/Documents/GitHub/NEXUS-R2/build"
+}  
